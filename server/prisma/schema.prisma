@@ -17,6 +17,7 @@ model User {
   password      String
   role          String   @default("user")
   subscriptions Subscription[]
+  refreshTokens RefreshToken[]
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }
@@ -43,4 +44,15 @@ model Subscription {
   plan      Plan     @relation(fields: [planId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model RefreshToken {
+  id         String   @id @default(cuid())
+  token      String   @unique
+  userId     String
+  expiresAt  DateTime
+  revoked    Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
