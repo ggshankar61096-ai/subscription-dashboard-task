@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setAuth, setError, setLoading } from '../store/authSlice';
-import axios from 'axios';
+import api from '../api/axios';
 
-const API_URL = 'http://localhost:5000/api';
+// API URL is read from VITE_API_URL via the api client
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -17,7 +17,7 @@ export default function Login() {
     e.preventDefault();
     dispatch(setLoading(true));
     try {
-      const res = await axios.post(`${API_URL}/auth/login`, { email, password });
+  const res = await api.post(`/auth/login`, { email, password });
       dispatch(setAuth({
         token: res.data.token,
         refreshToken: res.data.refreshToken,

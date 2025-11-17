@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setAuth, setError, setLoading } from '../store/authSlice';
-import axios from 'axios';
+import api from '../api/axios';
 
-const API_URL = 'http://localhost:5000/api';
+// API URL is read from VITE_API_URL via the api client
 
 export default function Register() {
   const [name, setName] = useState('');
@@ -23,19 +23,20 @@ export default function Register() {
     }
     dispatch(setLoading(true));
     try {
-      const res = await axios.post(`${API_URL}/auth/register`, { name, email, password });
+  const res = await api.post(`/auth/register`, { name, email, password });
       dispatch(setAuth({
         token: res.data.token,
         refreshToken: res.data.refreshToken,
         user: res.data.user,
       }));
       navigate('/dashboard');
-    } catch (err) {
-      if (axios.isAxiosError(err)) {
-        const msg = err.response?.data?.message || 'Registration failed';
-        setLocalError(msg);
-        dispatch(setError(msg));
-      }
+    } catch (err: unknown) {
+      // Handle Axios error shape
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const anyErr = err as any;
+      const msg = anyErr?.response?.data?.message || 'Registration failed';
+      setLocalError(msg);
+      dispatch(setError(msg));
     } finally {
       dispatch(setLoading(false));
     }

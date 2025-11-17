@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
+import api from '../api/axios';
 import { RootState, AppDispatch } from '../store/store';
 import { setPlans, setLoading, setError } from '../store/subscriptionSlice';
 
-const API_URL = 'http://localhost:5000/api';
+// API URL is read from VITE_API_URL via the api client
 
 export default function Plans() {
   const { plans, isLoading } = useSelector((state: RootState) => state.subscription);
@@ -16,11 +16,11 @@ export default function Plans() {
     const fetchPlans = async () => {
       dispatch(setLoading(true));
       try {
-        const res = await axios.get(`${API_URL}/plans`);
+  const res = await api.get('/plans');
         dispatch(setPlans(res.data));
-      } catch (err) {
-        dispatch(setError('Failed to fetch plans'));
-      } finally {
+      } catch {
+          dispatch(setError('Failed to fetch plans'));
+        } finally {
         dispatch(setLoading(false));
       }
     };
@@ -33,12 +33,10 @@ export default function Plans() {
       return;
     }
     try {
-      await axios.post(`${API_URL}/subscribe/${planId}`, {}, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await api.post(`/subscribe/${planId}`);
       setSubscribeMsg('Subscribed successfully!');
       setTimeout(() => setSubscribeMsg(''), 3000);
-    } catch (err) {
+    } catch {
       setSubscribeMsg('Subscription failed');
     }
   };

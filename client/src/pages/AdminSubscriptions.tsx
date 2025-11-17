@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import axios from 'axios';
+import api from '../api/axios';
 import type { RootState } from '../store/store';
 
-const API_URL = 'http://localhost:5000/api';
+// API URL is read from VITE_API_URL via the api client
 
 interface AdminSubscription {
   id: string;
@@ -29,9 +29,7 @@ export default function AdminSubscriptions() {
     const fetchSubscriptions = async () => {
       setIsLoading(true);
       try {
-        const res = await axios.get(`${API_URL}/admin/subscriptions`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await api.get('/admin/subscriptions');
         setSubscriptions(res.data);
       } catch {
         setError('Failed to fetch subscriptions');

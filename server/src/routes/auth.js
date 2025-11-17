@@ -62,4 +62,28 @@ router.post('/login', async (req, res) => {
   }
 });
 
+router.post('/refresh', async (req, res) => {
+  try {
+    const { refreshToken } = req.body;
+    if (!refreshToken) {
+      return res.status(400).json({ message: 'No refresh token provided' });
+    }
+
+    const decoded = verifyRefreshToken(refreshToken);
+    if (!decoded) {
+      return res.status(401).json({ message: 'Invalid refresh token' });
+    }
+
+    const user = await prisma.user.findUnique({ where: { id: decoded.userId } });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const { token, refreshToken: newRefresh } = generateTokens(user.id, user.email, user.role);
+    res.json({ token, refreshToken: newRefresh, user: { id: user.id, name: user.name, email: user.email, role: user.role } });
+  } catch (error) {
+    res.status(500).json({ message: 'Refresh failed', error: error.message });
+  }
+});
+
 export default router;

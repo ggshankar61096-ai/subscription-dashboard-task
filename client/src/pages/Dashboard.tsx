@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
+import api from '../api/axios';
 import type { RootState, AppDispatch } from '../store/store';
 import { setSubscription, setLoading, setError } from '../store/subscriptionSlice';
 
-const API_URL = 'http://localhost:5000/api';
+// API URL is read from VITE_API_URL via the api client
 
 export default function Dashboard() {
   const { subscription, isLoading } = useSelector((state: RootState) => state.subscription);
@@ -16,9 +16,7 @@ export default function Dashboard() {
     const fetchSubscription = async () => {
       dispatch(setLoading(true));
       try {
-        const res = await axios.get(`${API_URL}/my-subscription`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await api.get('/my-subscription');
         dispatch(setSubscription(res.data));
       } catch {
         dispatch(setError('Failed to fetch subscription'));
