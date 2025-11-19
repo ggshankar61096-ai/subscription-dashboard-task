@@ -217,6 +217,6 @@ Push to GitHub, connect repository, and deploy with environment variables set.
 **Your Name**
 - Name: Gowrishankar G
 - Email: gowthamshankar610@gmail.com
-- GitHub: [@gowrishankar](https://github.com/gowrishankar)
+- GitHub: [@gowrishankar](https://github.com/ggshankar61096-ai/subscription-dashboard-task)
 
 

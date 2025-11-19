@@ -34,9 +34,9 @@ export default function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 w-full">
-      <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-6">Login</h1>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-slate-900 w-full transition-colors">
+      <div className="bg-white dark:bg-slate-800 p-8 rounded shadow-md w-full max-w-md">
+        <h1 className="text-2xl font-bold mb-6 text-black dark:text-white">Login</h1>
         {localError && <p className="text-red-500 mb-4">{localError}</p>}
         <form onSubmit={handleLogin} className="space-y-4">
           <input
@@ -44,27 +44,27 @@ export default function Login() {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-2 border rounded"
+            className="w-full px-4 py-2 border dark:border-slate-600 rounded dark:bg-slate-700 dark:text-white"
           />
           <input
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-2 border rounded"
+            className="w-full px-4 py-2 border dark:border-slate-600 rounded dark:bg-slate-700 dark:text-white"
           />
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded font-semibold hover:bg-blue-700"
+            className="w-full bg-blue-600 text-white py-2 rounded font-semibold hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800"
           >
             Login
           </button>
         </form>
-        <p className="mt-4 text-center">
+        <p className="mt-4 text-center text-black dark:text-gray-300">
           Don't have an account?{' '}
           <button
             onClick={() => navigate('/register')}
-            className="text-blue-600 hover:underline"
+            className="text-blue-600 bg-white border border-blue-600 dark:text-blue-400 hover:underline"
           >
             Register
           </button>

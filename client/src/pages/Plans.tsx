@@ -80,18 +80,18 @@ export default function Plans() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 text-black">
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 py-12 transition-colors">
       <div className="max-w-7xl mx-auto px-4">
-        <h1 className="text-4xl font-bold mb-12 text-center">Our Plans</h1>
+        <h1 className="text-4xl font-bold mb-12 text-center bg-gray-300 p-3 text-blue-600 dark:text-white dark:bg-slate-700">Our Plans</h1>
         {subscribeMsg && (
-          <div className="bg-green-100 text-green-700 p-4 rounded mb-8">{subscribeMsg}</div>
+          <div className="bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-200 p-4 rounded mb-8">{subscribeMsg}</div>
         )}
         {isLoading ? (
-          <p className="text-center">Loading plans...</p>
+          <p className="text-center dark:text-gray-300">Loading plans...</p>
         ) : (
           <div className="grid md:grid-cols-3 gap-8">
             {plans.map((plan) => (
-              <div key={plan.id} className="bg-white p-8 rounded shadow-lg relative">
+              <div key={plan.id} className="bg-white dark:bg-slate-800 p-8 rounded shadow-lg relative">
                 <div className="absolute top-4 right-4 text-3xl">
                   {getPlanTier(plan.name).icon}
                 </div>
@@ -100,16 +100,16 @@ export default function Plans() {
                      {plan.name}
                   </span>
                 </h2>
-                <p className="text-3xl font-bold text-blue-600 mb-4">${plan.price}/month</p>
-                <p className="text-gray-600 mb-6">{plan.duration} days duration</p>
+                <p className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-4">${plan.price}/month</p>
+                <p className="text-gray-600 dark:text-gray-400 mb-6">{plan.duration} days duration</p>
                 <ul className="space-y-2 mb-6">
                   {plan.features.map((feature, idx) => (
-                    <li key={idx} className="text-gray-700">✓ {feature}</li>
+                    <li key={idx} className="text-gray-700 dark:text-gray-300">✓ {feature}</li>
                   ))}
                 </ul>
                 <button
                   onClick={() => handleSubscribe(plan.id)}
-                  className="w-full bg-blue-600 text-white py-2 rounded font-semibold hover:bg-blue-700"
+                  className="w-full bg-blue-600 text-white py-2 rounded font-semibold hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800"
                 >
                   Subscribe
                 </button>

@@ -28,28 +28,28 @@ export default function Dashboard() {
   }, [token, dispatch]);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 text-black">
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 py-12 transition-colors">
       <div className="max-w-4xl mx-auto px-4">
-        <h1 className="text-4xl font-bold mb-8">Dashboard</h1>
-        <div className="bg-white p-8 rounded shadow-lg mb-6">
-          <h2 className="text-2xl font-bold mb-4">Profile</h2>
-          <p className="text-lg"><strong>Name:</strong> {user?.name}</p>
-          <p className="text-lg"><strong>Email:</strong> {user?.email}</p>
-          <p className="text-lg"><strong>Role:</strong> {user?.role}</p>
+        <h1 className="text-4xl font-bold mb-8 dark:text-white">Dashboard</h1>
+        <div className="bg-white dark:bg-slate-800 p-8 rounded shadow-lg mb-6">
+          <h2 className="text-2xl font-bold mb-4 dark:text-white">Profile</h2>
+          <p className="text-lg dark:text-gray-300"><strong>Name:</strong> {user?.name}</p>
+          <p className="text-lg dark:text-gray-300"><strong>Email:</strong> {user?.email}</p>
+          <p className="text-lg dark:text-gray-300"><strong>Role:</strong> {user?.role}</p>
         </div>
-        <div className="bg-white p-8 rounded shadow-lg">
-          <h2 className="text-2xl font-bold mb-4">Current Subscription</h2>
+        <div className="bg-white dark:bg-slate-800 p-8 rounded shadow-lg">
+          <h2 className="text-2xl font-bold mb-4 dark:text-white">Current Subscription</h2>
           {isLoading ? (
-            <p>Loading subscription...</p>
+            <p className="dark:text-gray-300">Loading subscription...</p>
           ) : subscription ? (
             <div>
-              <p className="text-lg"><strong>Plan:</strong> {subscription.name}</p>
-              <p className="text-lg"><strong>Status:</strong> <span className={`font-bold ${subscription.status === 'active' ? 'text-green-600' : 'text-red-600'}`}>{subscription.status}</span></p>
-              <p className="text-lg"><strong>Start Date:</strong> {new Date(subscription.startDate).toLocaleDateString()}</p>
-              <p className="text-lg"><strong>End Date:</strong> {new Date(subscription.endDate).toLocaleDateString()}</p>
+              <p className="text-lg dark:text-gray-300"><strong>Plan:</strong> {subscription.name}</p>
+              <p className="text-lg dark:text-gray-300"><strong>Status:</strong> <span className={`font-bold ${subscription.status === 'active' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>{subscription.status}</span></p>
+              <p className="text-lg dark:text-gray-300"><strong>Start Date:</strong> {new Date(subscription.startDate).toLocaleDateString()}</p>
+              <p className="text-lg dark:text-gray-300"><strong>End Date:</strong> {new Date(subscription.endDate).toLocaleDateString()}</p>
             </div>
           ) : (
-            <p>No active subscription. <a href="/plans" className="text-blue-600 hover:underline">Browse plans</a></p>
+            <p className="dark:text-gray-300">No active subscription. <a href="/plans" className="text-blue-600 dark:text-blue-400 hover:underline">Browse plans</a></p>
           )}
         </div>
       </div>

@@ -43,9 +43,9 @@ export default function Register() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 text-black">
-      <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-6">Register</h1>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-slate-900 transition-colors">
+      <div className="bg-white dark:bg-slate-800 p-8 rounded shadow-md w-full max-w-md">
+        <h1 className="text-2xl font-bold mb-6 text-black dark:text-white">Register</h1>
         {localError && <p className="text-red-500 mb-4">{localError}</p>}
         <form onSubmit={handleRegister} className="space-y-4">
           <input
@@ -53,41 +53,41 @@ export default function Register() {
             placeholder="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full px-4 py-2 border rounded text-white"
+            className="w-full px-4 py-2 border dark:border-slate-600 rounded dark:bg-slate-700 dark:text-white"
           />
           <input
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-2 border rounded text-white"
+            className="w-full px-4 py-2 border dark:border-slate-600 rounded dark:bg-slate-700 dark:text-white"
           />
           <input
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-2 border rounded text-white"
+            className="w-full px-4 py-2 border dark:border-slate-600 rounded dark:bg-slate-700 dark:text-white"
           />
           <input
             type="password"
             placeholder="Confirm Password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            className="w-full px-4 py-2 border rounded text-white"
+            className="w-full px-4 py-2 border dark:border-slate-600 rounded dark:bg-slate-700 dark:text-white"
           />
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded font-semibold hover:bg-blue-700"
+            className="w-full bg-blue-600 text-white py-2 rounded font-semibold hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800"
           >
             Register
           </button>
         </form>
-        <p className="mt-4 text-center">
+        <p className="mt-4 text-center text-black dark:text-gray-300">
           Already have an account?{' '}
           <button
             onClick={() => navigate('/login')}
-            className="text-blue-600 hover:underline"
+            className="text-blue-600 bg-white border border-blue-600 dark:text-blue-400 hover:underline"
           >
             Login
           </button>

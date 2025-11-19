@@ -3,6 +3,7 @@ import { useNavigate, Link, NavLink } from 'react-router-dom';
 import { useState, memo } from 'react';
 import type { RootState } from '../store/store';
 import { logout } from '../store/authSlice';
+import useTheme from '../hooks/useTheme';
 
 interface NavLinkItemProps {
   to: string;
@@ -41,14 +42,19 @@ export default function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   const handleLogout = () => {
     dispatch(logout());
     navigate('/login');
   };
 
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
+
   return (
-    <nav className="bg-blue-600 text-white shadow-lg sticky top-0 z-50 w-full">
+    <nav className="bg-blue-600 dark:bg-slate-900 text-white shadow-lg sticky top-0 z-50 w-full transition-colors">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
         <Link to="/" className="text-2xl font-bold text-white">
           SubDash
@@ -65,7 +71,15 @@ export default function Navbar() {
                 <NavLinkItem to="/dashboard" label="Dashboard" />
               )}
               <div className="flex items-center gap-4">
-                <span className="text-sm">{user?.name}</span>
+                <button
+                  onClick={toggleTheme}
+                  aria-label="Toggle theme"
+                  className="px-2 py-1 rounded hover:bg-blue-700"
+                >
+                  {theme === 'dark' ? '🌙' : '🌞'}
+                </button>
+                
+                <span className="text-sm">Hi {user?.name}!</span>
                 <button
                   onClick={handleLogout}
                   className="bg-red-600 px-4 py-2 rounded hover:bg-red-700"
@@ -76,6 +90,13 @@ export default function Navbar() {
             </>
           ) : (
             <>
+              <button
+                onClick={toggleTheme}
+                aria-label="Toggle theme"
+                className="px-2 py-1 rounded hover:bg-blue-700"
+              >
+                {theme === 'dark' ? '🌙' : '🌞'}
+              </button>
               <NavLinkItem to="/login" label="Login" />
               <NavLinkItem to="/register" label="Register" isRegister />
             </>
@@ -96,8 +117,15 @@ export default function Navbar() {
 
       {/* Mobile Menu Dropdown */}
       {isMenuOpen && (
-        <div className="md:hidden bg-blue-700 border-t border-blue-500">
+        <div className="md:hidden bg-blue-700 dark:bg-slate-800 border-t border-blue-500 dark:border-slate-700">
           <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-3">
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              className="w-full text-left px-3 py-2 rounded hover:bg-blue-600 text-white"
+            >
+              {theme === 'dark' ? '🌙 Dark Mode' : '🌞 Light Mode'}
+            </button>
             {token ? (
               <>
                 <NavLinkItem to="/plans" label="Plans" variant="mobile" onClick={() => setIsMenuOpen(false)} />
@@ -107,7 +135,7 @@ export default function Navbar() {
                   <NavLinkItem to="/dashboard" label="Dashboard" variant="mobile" onClick={() => setIsMenuOpen(false)} />
                 )}
                 <div className="pt-3 border-t border-blue-500">
-                  <p className="text-sm px-3 py-2 text-white">{user?.name}</p>
+                  <p className="text-sm px-3 py-2 text-white">Hi {user?.name}!</p>
                   <button
                     onClick={() => {
                       handleLogout();
