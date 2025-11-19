@@ -10,6 +10,7 @@ interface Plan {
 
 interface Subscription {
   id: string;
+  name?: string; // optional; API may return only planId
   planId: string;
   startDate: string;
   endDate: string;
@@ -38,7 +39,22 @@ const subscriptionSlice = createSlice({
       state.plans = action.payload;
     },
     setSubscription: (state, action: PayloadAction<Subscription | null>) => {
-      state.subscription = action.payload;
+      const payload = action.payload;
+      if (!payload) {
+        state.subscription = null;
+        return;
+      }
+
+      // If API didn't provide a plan name, try to resolve it from known plans
+      let subscriptionToStore = payload;
+      if (!payload.name && payload.planId) {
+        const plan = state.plans.find((p) => p.id === payload.planId);
+        if (plan) {
+          subscriptionToStore = { ...payload, name: plan.name };
+        }
+      }
+
+      state.subscription = subscriptionToStore;
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;

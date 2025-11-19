@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import api from '../api/axios';
-import { RootState, AppDispatch } from '../store/store';
+import type { RootState, AppDispatch } from '../store/store';
 import { setPlans, setLoading, setError } from '../store/subscriptionSlice';
 
 // API URL is read from VITE_API_URL via the api client
@@ -41,8 +41,46 @@ export default function Plans() {
     }
   };
 
+  const getPlanTier = (name: string) => {
+    const n = name?.toLowerCase() ?? '';
+    if (n.includes('bron') || n.includes('basic')) {
+      return {
+        tier: 'Bronze',
+        icon: '🥉',
+        mainBadgeClass: 'w-full px-3 py-1 rounded text-white bg-[#cd7f32]',
+        cornerBadgeClass: 'px-3 py-1 rounded text-xs font-bold text-white bg-[#cd7f32]',
+      };
+    }
+    if (n.includes('silver') || n.includes('professional')) {
+      return {
+        tier: 'Silver',
+        icon: '🥈',
+        mainBadgeClass: 'w-full px-3 py-1 rounded text-black bg-gray-300',
+        cornerBadgeClass: 'px-3 py-1 rounded text-xs font-bold text-black bg-gray-300',
+      };
+    }
+    if (n.includes('gold') || n.includes('enterprise')) {
+      return {
+        tier: 'Gold',
+        icon: '👑',
+        mainBadgeClass: 'w-full px-3 py-1 rounded text-black bg-[rgb(245,202,7)]',
+        cornerBadgeClass: 'px-3 py-1 rounded text-xs font-bold text-black bg-[rgb(245,202,7)]',
+      };
+    }
+    return {
+      tier: 'Basic',
+      icon: '⭐',
+      mainBadgeClass: 'w-full px-3 py-1 rounded text-black bg-gray-200',
+      cornerBadgeClass: 'px-3 py-1 rounded text-xs font-bold text-black bg-gray-200',
+    };
+  };
+
+  const getBadgeClasses = (name: string) => {
+    return getPlanTier(name).mainBadgeClass;
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-gray-50 py-12 text-black">
       <div className="max-w-7xl mx-auto px-4">
         <h1 className="text-4xl font-bold mb-12 text-center">Our Plans</h1>
         {subscribeMsg && (
@@ -53,8 +91,15 @@ export default function Plans() {
         ) : (
           <div className="grid md:grid-cols-3 gap-8">
             {plans.map((plan) => (
-              <div key={plan.id} className="bg-white p-8 rounded shadow-lg">
-                <h2 className="text-2xl font-bold mb-2">{plan.name}</h2>
+              <div key={plan.id} className="bg-white p-8 rounded shadow-lg relative">
+                <div className="absolute top-4 right-4 text-3xl">
+                  {getPlanTier(plan.name).icon}
+                </div>
+                <h2 className={`text-2xl font-bold mb-2`}>
+                  <span className={getBadgeClasses(plan.name)}>
+                     {plan.name}
+                  </span>
+                </h2>
                 <p className="text-3xl font-bold text-blue-600 mb-4">${plan.price}/month</p>
                 <p className="text-gray-600 mb-6">{plan.duration} days duration</p>
                 <ul className="space-y-2 mb-6">

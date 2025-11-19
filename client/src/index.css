@@ -38,6 +38,9 @@ h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
+.bg-\[rgb\(245\,202\,7\)\]{
+background-color: rgb(245, 202, 7);
+}
 
 button {
   border-radius: 8px;

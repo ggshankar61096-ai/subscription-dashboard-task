@@ -28,7 +28,7 @@ export default function Dashboard() {
   }, [token, dispatch]);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-gray-50 py-12 text-black">
       <div className="max-w-4xl mx-auto px-4">
         <h1 className="text-4xl font-bold mb-8">Dashboard</h1>
         <div className="bg-white p-8 rounded shadow-lg mb-6">
@@ -43,6 +43,7 @@ export default function Dashboard() {
             <p>Loading subscription...</p>
           ) : subscription ? (
             <div>
+              <p className="text-lg"><strong>Plan:</strong> {subscription.name}</p>
               <p className="text-lg"><strong>Status:</strong> <span className={`font-bold ${subscription.status === 'active' ? 'text-green-600' : 'text-red-600'}`}>{subscription.status}</span></p>
               <p className="text-lg"><strong>Start Date:</strong> {new Date(subscription.startDate).toLocaleDateString()}</p>
               <p className="text-lg"><strong>End Date:</strong> {new Date(subscription.endDate).toLocaleDateString()}</p>

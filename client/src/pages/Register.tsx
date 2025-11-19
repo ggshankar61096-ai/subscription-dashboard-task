@@ -43,7 +43,7 @@ export default function Register() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 text-black">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
         <h1 className="text-2xl font-bold mb-6">Register</h1>
         {localError && <p className="text-red-500 mb-4">{localError}</p>}
@@ -53,28 +53,28 @@ export default function Register() {
             placeholder="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full px-4 py-2 border rounded"
+            className="w-full px-4 py-2 border rounded text-white"
           />
           <input
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-2 border rounded"
+            className="w-full px-4 py-2 border rounded text-white"
           />
           <input
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-2 border rounded"
+            className="w-full px-4 py-2 border rounded text-white"
           />
           <input
             type="password"
             placeholder="Confirm Password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            className="w-full px-4 py-2 border rounded"
+            className="w-full px-4 py-2 border rounded text-white"
           />
           <button
             type="submit"

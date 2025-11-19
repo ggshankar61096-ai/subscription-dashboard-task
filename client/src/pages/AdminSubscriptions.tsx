@@ -41,7 +41,7 @@ export default function AdminSubscriptions() {
   }, [token, user]);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-gray-50 py-12 text-black">
       <div className="max-w-7xl mx-auto px-4">
         <h1 className="text-4xl font-bold mb-8">Admin - All Subscriptions</h1>
         {error && <div className="bg-red-100 text-red-700 p-4 rounded mb-6">{error}</div>}

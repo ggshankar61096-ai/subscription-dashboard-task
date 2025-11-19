@@ -1,6 +1,7 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import Unauthorized from '../pages/Unauthorized';
 import type { RootState } from '../store/store';
 
 interface ProtectedRouteProps {
@@ -16,7 +17,7 @@ export default function ProtectedRoute({ children, requiredRole }: ProtectedRout
   }
 
   if (requiredRole && user?.role !== requiredRole) {
-    return <Navigate to="/dashboard" replace />;
+    return <Unauthorized />;
   }
 
   return children;

@@ -83,7 +83,7 @@ The backend will run on `http://localhost:5000`.
 
 **Default Test Accounts:**
 - **Admin:** admin@example.com / admin123
-- **User:** user@example.com / user123
+- **User:** gowtham123@gmail.com / Gowtham123
 
 ### 3. Setup Frontend
 
@@ -215,13 +215,8 @@ Push to GitHub, connect repository, and deploy with environment variables set.
 ## Author
 
 **Your Name**
-- Email: your.email@example.com
-- GitHub: [@yourusername](https://github.com/yourusername)
+- Name: Gowrishankar G
+- Email: gowthamshankar610@gmail.com
+- GitHub: [@gowrishankar](https://github.com/gowrishankar)
 
-## License
 
-MIT License - feel free to use this project for learning and development purposes.
-
----
-
-Built with ❤️ for learning full-stack development

@@ -13,7 +13,7 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <Navbar />
+          <Navbar />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

@@ -58,6 +58,7 @@ router.get('/my-subscription', authMiddleware, async (req, res) => {
     res.json({
       id: subscription.id,
       planId: subscription.planId,
+      name: subscription.plan.name,
       startDate: subscription.startDate,
       endDate: subscription.endDate,
       status: subscription.status,
