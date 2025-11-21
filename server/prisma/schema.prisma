@@ -6,7 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  // Switched to PostgreSQL for production on Vercel
+  // Set DATABASE_URL in Vercel environment variables (e.g. postgres://USER:PASS@HOST:PORT/DATABASE)
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 

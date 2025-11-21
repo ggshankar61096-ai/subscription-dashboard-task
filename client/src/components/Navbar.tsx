@@ -56,7 +56,7 @@ export default function Navbar() {
   return (
     <nav className="bg-blue-600 dark:bg-slate-900 text-white shadow-lg sticky top-0 z-50 w-full transition-colors">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <Link to="/" className="text-2xl font-bold text-white">
+        <Link to="/" className="text-2xl font-bold text-white dark:text-blue-600">
           SubDash
         </Link>
 
@@ -106,7 +106,7 @@ export default function Navbar() {
         {/* Hamburger Menu Button */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden flex flex-col gap-1 p-2"
+          className=" bg-blue-600 border border-white md:hidden flex flex-col gap-1 p-2"
           aria-label="Toggle menu"
         >
           <span className="block w-6 h-0.5 bg-white"></span>
